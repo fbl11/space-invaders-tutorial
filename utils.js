@@ -4,7 +4,7 @@ var Keyboarder = function() {
   window.onkeydown = function(event) {
     keyState[event.keyCode] = true
   }
-  window.onkeyup = function (event) {
+  window.onkeyup = function(event) {
     keyState[event.keyCode] = false
   }
 
@@ -30,3 +30,13 @@ var createInvaders = function(game) {
   }
   return invaders
 }
+
+var isColliding = function(unitOne, unitTwo) { // returns true if any of the blow are false
+  return !(unitOne === unitTwo || // if this is true, the two compared units are one and the same and therefore can't be colliding
+    unitOne.center.x + unitOne.size.x / 2 < unitTwo.center.x - unitTwo.size.x / 2 || // if the right edge of the left unit is to the left of the left edge of the right unit, they cannot be colliding
+    unitOne.center.x - unitOne.size.x / 2 > unitTwo.center.x + unitTwo.size.x / 2 || // if the left edge of the right unit is to the right of the right edge of the left unit, they cannot be colliding
+    unitOne.center.y + unitOne.size.y / 2 < unitTwo.center.y - unitTwo.size.y / 2 || // if the top edge of the bottom unit is below the bottom edge of the top unit, they cannot be colliding
+    unitOne.center.y - unitOne.size.y / 2 > unitTwo.center.y + unitTwo.size.y / 2) // if the bottom edge of the top unit is above the top edge of the bottom unit, they cannot be colliding
+}
+
+

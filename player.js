@@ -13,7 +13,7 @@ class Player {
       this.center.x -= 2
     }
     if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
-      var bullet = new Bullet({ x: this.center.x, y: this.center.y - this.size.x /  2 }, { x: 0, y: -6 }) // spawn location, bullet velocity
+      var bullet = new Bullet({ x: this.center.x, y: this.center.y - this.size.x / 2 }, { x: 0, y: -10 }) // spawn location, bullet velocity
       this.game.addUnit(bullet)
     } 
     // console.log(this.center)

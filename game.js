@@ -17,6 +17,15 @@
 
   Game.prototype = {
     update: function() {
+      var activeUnits = this.activeUnits
+      var notCollidingWithAnything = function(unitOne) { // passes in the unit I want to check for collisions
+        return activeUnits.filter(function(unitTwo) { // filters out and collects all units from the array that are colliding with unitOne
+          return isColliding(unitOne, unitTwo)
+        }).length === 0 // if this is zero, no units are colliding with unitOne
+      }
+
+      this.activeUnits = this.activeUnits.filter(notCollidingWithAnything) // removes all units that are colliding from the active units array
+
       for (var i = 0; i < this.activeUnits.length; i++) {
         this.activeUnits[i].update()
       }
@@ -31,8 +40,15 @@
     },
     addUnit: function(unit) {
       this.activeUnits.push(unit)
+    },
+    
+    invadersBelow: function(invader) {
+      return this.activeUnits.filter(function(unit) {
+        return unit instanceof(Invader) &&
+          unit.center.y > invader.center.y &&
+          unit.center.x - invader.center.x < invader.size.x
+      }).length > 0
     }
-
   }
 
   window.onload = function() {
