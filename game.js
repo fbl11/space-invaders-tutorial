@@ -4,7 +4,7 @@
     var screen = canvas.getContext('2d')
     var screenSize = { x: canvas.width, y: canvas.height }
 
-    this.activeUnits = [new Player(this, screenSize)] // contains player, invaders , bullets
+    this.activeUnits = createInvaders(this).concat(new Player(this, screenSize)) // contains player, invaders , bullets - when invaders are added: call createInvaders() function - which returns an array of invader entities, passing in the current game ('this').  Concat this with the Player entity.
 
     var self = this
     var tick = function() {
@@ -33,15 +33,7 @@
       this.activeUnits.push(unit)
     }
 
-
   }
-
-  var drawRect = function(screen, activeUnit) {
-    screen.fillRect(activeUnit.center.x - activeUnit.size.x / 2, // horizontal position
-                    activeUnit.center.y - activeUnit.size.y / 2, // vertical position
-                    activeUnit.size.x, // width
-                    activeUnit.size.y) // hight
-   }
 
   window.onload = function() {
     new Game("screen")

@@ -13,3 +13,20 @@ var Keyboarder = function() {
   }
   this.KEYS = { RIGHT: 37, LEFT: 39, SPACE: 32}
 }
+
+var drawRect = function(screen, activeUnit) {
+  screen.fillRect(activeUnit.center.x - activeUnit.size.x / 2, // horizontal position
+    activeUnit.center.y - activeUnit.size.y / 2, // vertical position
+    activeUnit.size.x, // width
+    activeUnit.size.y) // hight
+}
+
+var createInvaders = function(game) {
+  var invaders = []
+  for (i = 0; i < 24; i++) {
+    var x = 30 + (i % 8) * 30 // horizontal position: center is 30 from the left border of the canvas, + i%8 because we need 8 colums of invaders, * 30 to space each invader 30 apart
+    var y = 30 + (i % 3) * 20 // vertical position: center is 30 from the top border of the canvas, + i%3 to create three rows, * 20 to space them 30 apart
+    invaders.push(new Invader(game, { x: x, y: y })) // creates new invaders with game and center as calculated above
+  }
+  return invaders
+}
